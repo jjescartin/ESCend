@@ -1,16 +1,27 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Auth\LoginUser;
+use App\Http\Controllers\Auth\LogoutUser;
 
+
+Route::get('/', function(){
+    return Inertia::render('Landingpage');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 });
 
 
-Route::get('/', function(){
-    return Inertia::render('Welcome');
-});
+// Route::middleware('auth')->group( function () {
+//     Route::get('/', function(){
+//         return Inertia::render('Dashboard');
+//     });
+// });
+
+
+
+Route::post('/login', LoginUser::class)->name('user.login.submit');
+Route::post('/logout', LogoutUser::class)->name('user.logout');
