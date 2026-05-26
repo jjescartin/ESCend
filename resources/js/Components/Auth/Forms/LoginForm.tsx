@@ -8,9 +8,10 @@ type Props = {
     openRegister: () => void,
     onchange: (e: ChangeEvent<HTMLInputElement>) => void;
     onSubmit: () => void;
+    viewDemo: ()=> void;
 }
 
-const LoginForm: FC<Props> = ({ data, openRegister, onchange, onSubmit }) => {
+const LoginForm: FC<Props> = ({ data, openRegister, onchange, onSubmit, viewDemo }) => {
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -117,6 +118,15 @@ const LoginForm: FC<Props> = ({ data, openRegister, onchange, onSubmit }) => {
                     className="ml-1 text-green-500 hover:underline"
                     onClick={openRegister}>
                     Create an account
+                </button>
+            </p>
+            <p className="mb-4 text-sm text-gray-500 text-center mt-4">
+                Click here to
+                <button
+                    type="button"
+                    className="ml-1 text-green-500 hover:underline"
+                    onClick={viewDemo}>
+                    View Demo
                 </button>
             </p>
         </div>

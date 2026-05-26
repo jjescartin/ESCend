@@ -35,10 +35,10 @@ export default function Welcome() {
             ...prev,
             [id]: value,
         }));
-        console.log(loginFormData);
     }
 
     const handleLogin = async (form: LoginFormDetails) => {
+        console.log(form);
         try {
             const res = await loginUser(form)
 
@@ -49,6 +49,10 @@ export default function Welcome() {
         } catch (error) {
             console.log('Failed to login user', error);
         }
+    }
+
+    const handleDemoLogin = () => {
+        window.location.href = "/dashboard";
     }
 
     const handleSubmitRegisterForm = async (form: RegisterFormDetails) => {
@@ -82,7 +86,8 @@ export default function Welcome() {
                         data = {loginFormData}
                         openRegister={openRegisterModal} 
                         onchange={handleLoginFormChange}
-                        onSubmit={()=> {handleLogin(loginFormData)}}/>
+                        onSubmit={()=> {handleLogin(loginFormData)}}
+                        viewDemo={handleDemoLogin}/>
                 </div>
             </div>
 
