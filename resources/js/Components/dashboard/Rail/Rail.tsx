@@ -4,7 +4,7 @@ import { faGear, faBell, faCircleUser, faTableColumns, faBolt, faSearch } from '
 import RailButtons from "./RailButtons";
 
 type Props = {
-    showPanel: ()=> void
+    showPanel: (selected:string)=> void
 }
 
 export default function Rail({showPanel}: Props) {
@@ -12,7 +12,7 @@ export default function Rail({showPanel}: Props) {
         <div className="rail-component top-0 left-0 h-screen w-15 flex flex-col items-center bg-black gap-4 px-2 py-3  justify-between">
             {/* Top section */}
             <div className="flex flex-col items-center w-100">
-                <div className="text-green-500  text-4xl font-bold py-2 pb-5 px-2">
+                <div className="text-green-500  text-3xl font-bold py-2 pb-5 px-2">
                     ESC
                 </div>
                 <RailButtons 
@@ -34,10 +34,7 @@ export default function Rail({showPanel}: Props) {
 
             {/* Bottom section */}
             <div className="flex flex-col items-center ">
-                <button className="text-white text-2xl py-3 px-2" onClick={showPanel}>
-                    <FontAwesomeIcon icon={faGear} />
-                </button>
-                <button className="text-White text-3xl py-3 px-2" onClick={showPanel}>
+                <button className="text-White text-3xl py-3 px-2" onClick={()=>showPanel("Profile")}>
                     <FontAwesomeIcon icon={faCircleUser}/>
                 </button>
             </div>

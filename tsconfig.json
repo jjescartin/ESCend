@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "target": "esnext",
@@ -7,11 +8,25 @@
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "types": ["vite/client"],
+    "paths": {
+      "@/*": [
+        "resources/js/*"
+      ]
+    },
+    "types": [
+      "vite/client"
+    ],
     "skipLibCheck": true,
     "strict": true,
     "resolveJsonModule": true
   },
-  "include": ["resources/**/*.ts", "resources/**/*.tsx", "vite.config.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "resources/**/*.ts",
+    "resources/**/*.tsx",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
