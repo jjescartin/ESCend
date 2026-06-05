@@ -1,15 +1,16 @@
 import React from "react";
 import { useDashboard } from "../../../Context/DashboardContext";
 import { MoreHorizontal } from 'lucide-react';
+import { Board } from "@/Interface/Dashboard";
 
 export default function BoardPanel () {
     const context = useDashboard();
     if (!context) return null;
 
-    const {boards} = context;
+    const {boards, setSelectedBoard} = context;
 
-    const handleBoardClick = () =>{
-        console.log('board clicked');
+    const handleBoardClick = (board: Board) =>{
+        setSelectedBoard(board);
     }
     
     return (
@@ -21,7 +22,7 @@ export default function BoardPanel () {
                 {boards.map(board=>(
                     <div 
                         key={board.id}
-                        onClick={handleBoardClick}
+                        onClick={()=>handleBoardClick(board)}
                         className="flex items-center gap-1 p-2 px-3 rounded-lg cursor-pointer
                         hover:bg-green-200 transition-colors group">
                         

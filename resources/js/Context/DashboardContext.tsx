@@ -5,6 +5,8 @@ type DashboardContextType = {
     boards: Board[],
     alerts: Alert[],
     profile: Profile,
+    selectedBoard: Board | null,
+    setSelectedBoard: (board: Board) => void,
 }
 
 export const DashboardContext = createContext<DashboardContextType | null>(null);
