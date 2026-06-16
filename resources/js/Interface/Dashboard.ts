@@ -3,6 +3,65 @@ export interface Board {
     boardName: string
 }
 
+export interface BoardContent {
+    id: number,
+    name: string | null, 
+    end_date: string | null,
+    completed: boolean
+}
+
+export interface Column {
+    id: number,
+    board_id: number,
+    title: string,
+    order: number,
+    color: string,
+    cards: CardTile[]
+}
+
+export interface CardTile {
+    id: number,
+    column_id: number,
+    code: string,
+    title: string,
+    tags: Tag[],
+    assignees: Assignee[]
+}
+export interface CardDetail {
+    id: number,
+    column_id: number,
+    code: string
+    title: string,
+    description: string | null, 
+    order: number,
+    priority: string,
+    created_at: string,
+    due_date: string | null,
+    tags: Tag[],
+    assignees: Assignee[],
+    comments: Comment[]
+}
+
+export interface Comment {
+    id: number,
+    user: Assignee,
+    message: string,
+    created_at: string,
+}
+
+export interface Tag {
+    id: number,
+    label: string,
+    color: string
+}
+
+export interface Assignee {
+    id: number,
+    name: string,
+    initials: string,
+    avatar: string | null
+}
+
 export interface Alert {
     id: number, 
     message: string , 
