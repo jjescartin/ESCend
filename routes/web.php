@@ -6,13 +6,15 @@ use App\Http\Controllers\Auth\LoginUser;
 use App\Http\Controllers\Auth\LogoutUser;
 
 
-Route::get('/', function(){
-    return Inertia::render('Landingpage');
-});
+// Route::get('/', function(){
+//     return Inertia::render('Landingpage');
+// });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-});
+
+
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// });
 
 
 // Route::middleware('auth')->group( function () {
@@ -23,5 +25,14 @@ Route::get('/dashboard', function () {
 
 
 
+// Route::post('/login', LoginUser::class)->name('user.login.submit');
+// Route::post('/logout', LogoutUser::class)->name('user.logout');
+
+Route::get('/', fn()=> Inertia::render('Landingpage'));
+
 Route::post('/login', LoginUser::class)->name('user.login.submit');
-Route::post('/logout', LogoutUser::class)->name('user.logout');
+
+Route::middleware('auth')->group( function () {
+    Route::get('/dashboard', fn()=> Inertia::render('Dashboard'));
+    Route::get('logout', LogoutUser::class)->name('user.logout');
+});

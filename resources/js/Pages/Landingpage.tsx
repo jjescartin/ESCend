@@ -52,7 +52,10 @@ export default function Welcome() {
     }
 
     const handleDemoLogin = () => {
-        window.location.href = "/dashboard";
+        handleLogin({
+            email: "demo@mail.com",
+            password: "password"
+        })
     }
 
     const handleSubmitRegisterForm = async (form: RegisterFormDetails) => {

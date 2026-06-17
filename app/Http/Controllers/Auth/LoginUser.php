@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LoginUser extends Controller
@@ -15,20 +14,25 @@ class LoginUser extends Controller
         try {
             $credentials = $request->only('email', 'password');
            
-            if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-                
+            if (!Auth::attempt($credentials)) {
                 return response()->json([
-                    'success' => true,
-                    'user' => Auth::user(),
-                ]);
+                    'success'=> false,
+                    'message'=> 'Invalid credentials',                
+                ], 401);
             }
+
+            $request->session()->regenerate();
+
+            return response()->json([
+                'success'=> true,
+                'user'=> Auth::user() 
+            ]);
+
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
-                'message' => 'Something went wrong. Please try again.',
-                'error' => $th->getMessage(),
-            ], 422);
+                'message' => 'Something went wrong. Please try again.'
+            ], 500);
         }
     }
 }
