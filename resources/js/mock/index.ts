@@ -193,9 +193,12 @@ export const MOCK_CARD_COMMENTS = [
 
 export const MOCK_PROFILE = {
     id: 1,
+    first_name: "Demo",
+    last_name: "User",
     username: "Demo",
-    mail: "demo@mail.com",
+    email: "demo@mail.com",
     initials: "D",
+    created_at: "2025-07-15",
     actions: [
         {id: 1, label: "View Profile", key: "view_profile"},
         {id: 2, label: "Change Password", key: "change_pw"},

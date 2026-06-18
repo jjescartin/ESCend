@@ -1,6 +1,8 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterUser;
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,3 +16,8 @@ use App\Http\Controllers\Auth\RegisterUser;
 
 
 Route::post('/register', RegisterUser::class)->name('register.user');
+// Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('show.profile');
+});

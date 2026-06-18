@@ -1,23 +1,27 @@
-import { useDashboard } from "@/Context/DashboardContext";
-import React from "react";
 import { faGear, faKey, IconDefinition,faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useProfile } from "@/Context/ProfileContext";
 
 export default function ProfilePanel() {
-    const context = useDashboard();
+    const context = useProfile();
     if (!context) return null;
 
-    const { profile } = context
-
-    const handleProfileClick = () => {
-        console.log('clicks on profile');
-    }
+    const { profile, handleLogout } = context
 
     const ACTION_ICONS: Record<string, IconDefinition> = {
         view_profile: faUser,
         change_pw: faKey,
         settings: faGear,
         logout: faRightFromBracket,
+    }
+
+    const handleAction = (key: string) => {
+        switch(key) {
+            case 'logout': handleLogout(); break;
+            case 'view_profile': break;
+            case 'settings': break;
+            case 'change_pw': break;
+        }
     }
 
     return (
@@ -29,13 +33,14 @@ export default function ProfilePanel() {
                 <span>{profile.username}</span>
             </div>
             <div className="text-lg font-extralight opacity-30 pl-3 pb-2">
-                <span>{profile.mail}</span>
+                <span>{profile.email}</span>
             </div>
             <hr></hr>
             <div className="p-2">
                 {profile.actions.map((action) => ( 
                     <div 
                         key={action.id}
+                        onClick = {() => handleAction(action.key) }
                         className="flex items-center gap-1 p-2 px-3 rounded-lg cursor-pointer
                         hover:bg-green-200 transition-colors group">
                     

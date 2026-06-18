@@ -2,8 +2,8 @@ import React, { useState, ChangeEvent, } from "react";
 import LoginForm from "../Components/Auth/Forms/LoginForm";
 import RegisterModal from "../Components/Auth/Modals/RegisterModal";
 import { LoginFormDetails, RegisterFormDetails } from "../Interface/Auth";
-import { registerUser } from "../APIs/RegisterUserApi"
-import { loginUser } from "../APIs/LoginUser";
+import { registerUser } from "../APIs/Auth/RegisterUserApi"
+import { loginUser } from "../APIs/Auth/LoginUser";
 
 
 export default function Welcome() {

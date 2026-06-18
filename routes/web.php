@@ -28,11 +28,11 @@ use App\Http\Controllers\Auth\LogoutUser;
 // Route::post('/login', LoginUser::class)->name('user.login.submit');
 // Route::post('/logout', LogoutUser::class)->name('user.logout');
 
-Route::get('/', fn()=> Inertia::render('Landingpage'));
+Route::get('/', fn()=> Inertia::render('Landingpage'))->name('login');
 
 Route::post('/login', LoginUser::class)->name('user.login.submit');
 
 Route::middleware('auth')->group( function () {
     Route::get('/dashboard', fn()=> Inertia::render('Dashboard'));
-    Route::get('logout', LogoutUser::class)->name('user.logout');
+    Route::post('logout', LogoutUser::class)->name('user.logout');
 });

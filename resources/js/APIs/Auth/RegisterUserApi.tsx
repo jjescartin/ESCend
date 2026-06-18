@@ -1,5 +1,5 @@
 import api from "axios";
-import {RegisterFormDetails} from "../Interface/Auth"
+import {RegisterFormDetails} from "../../Interface/Auth"
 
 export const registerUser = async (payload: RegisterFormDetails) => {
   try {

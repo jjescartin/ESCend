@@ -4,9 +4,10 @@ import { Board, Alert, Settings, Profile } from "../Interface/Dashboard";
 type DashboardContextType = {
     boards: Board[],
     alerts: Alert[],
-    profile: Profile,
+    // profile: Profile,
     selectedBoard: Board | null,
     setSelectedBoard: (board: Board) => void,
+    handleLogout: (profile: Profile) => void,
 }
 
 export const DashboardContext = createContext<DashboardContextType | null>(null);

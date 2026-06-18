@@ -83,8 +83,11 @@ export interface ProfileAction {
 
 export interface Profile {
     id: number,
+    first_name: string,
+    last_name: string,
     username: string,
-    mail: string,
+    email: string,
     initials: string,
+    created_at: string,
     actions: ProfileAction[]
 }
