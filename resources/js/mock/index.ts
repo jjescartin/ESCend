@@ -1,96 +1,3 @@
-// export const MOCK_BOARD_CONTENTS = [
-//   {
-//     id: 1,
-//     name: "ESCend",
-//     end_date: "2025-12-31",
-//     completed: 0,
-//     columns: [
-//       {
-//         id: 1,
-//         title: "To Do",
-//         order: 0,
-//         color: "#7C3AED",
-//         cards: [
-//           {
-//             id: 1,
-//             title: "Set up Laravel scaffolding",
-//             code: "SETUP-1",
-//             description: null,
-//             order: 0,
-//             priority: "mid",
-//             due_date: null,
-//             tags: [{ id: 1, label: "Backend", color: "purple" }],
-//             assignees: [{ id: 1, name: "Joallen Escartin", initials: "JE", avatar: null }]
-//           },
-//           {
-//             id: 2,
-//             title: "Design database schema",
-//             code: "SETUP-4",
-//             description: "Define all tables, relationships, and indexes.",
-//             order: 1,
-//             priority: "high",
-//             due_date: "2025-07-15",
-//             tags: [{ id: 1, label: "Backend", color: "purple" }],
-//             assignees: [{ id: 1, name: "Joallen Escartin", initials: "JE", avatar: null }, { id: 2, name: "Mia Escartin", initials: "ME", avatar: null }]
-//           }
-//         ]
-//       },
-//       {
-//         id: 2,
-//         title: "In Progress",
-//         order: 1,
-//         color: "#F59E0B",
-//         cards: [
-//           {
-//             id: 3,
-//             title: "Build drag-and-drop UI",
-//             code: "SETUP-2",
-//             description: null,
-//             order: 0,
-//             priority: "high",
-//             due_date: "2025-07-10",
-//             tags: [{ id: 2, label: "Frontend", color: "amber" }],
-//             assignees: [{ id: 1, name: "Joallen Escartin", initials: "JE", avatar: null }]
-//           }
-//         ]
-//       },
-//       {
-//         id: 3,
-//         title: "Done",
-//         order: 2,
-//         color: "#10B981",
-//         cards: [
-//           {
-//             id: 4,
-//             title: "Repo init & project setup",
-//             code: "SETUP-3",
-//             description: null,
-//             order: 0,
-//             priority: "low",
-//             due_date: "2025-06-30",
-//             tags: [{ id: 3, label: "Done", color: "green" }],
-//             assignees: [{ id: 2, name: "AR", initials: "AR", avatar: null }]
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     name: "Orphan Outreach Program",
-//     end_date: "",
-//     completed: 0,
-//     columns: []
-//   },
-//   {
-//     id: 3,
-//     name: "8Bacus online casino",
-//     end_date: "",
-//     completed: 0,
-//     columns: []
-//   },
-// ]
-
 // Panel display - loaded on app load
 export const MOCK_BOARDS = [
     { id: 1, boardName: "ESCend" },
@@ -184,11 +91,6 @@ export const MOCK_CARD_DETAILS = [
         comments: [] 
     },
 ]
-
-export const MOCK_CARD_COMMENTS = [
-
-]
-
 
 
 export const MOCK_PROFILE = {

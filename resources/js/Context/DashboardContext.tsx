@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import { Board, Alert, Settings, Profile } from "../Interface/Dashboard";
 
 type DashboardContextType = {
-    boards: Board[],
+    boardLists: Board[] | null,
     alerts: Alert[],
     // profile: Profile,
     selectedBoard: Board | null,

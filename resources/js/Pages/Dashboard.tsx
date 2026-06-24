@@ -3,12 +3,13 @@ import BoardComponent from '../Components/dashboard/Board/BoardComponent';
 import { useState, useEffect} from 'react';
 import Panel from '../Components/dashboard/Panel/Panel';
 import { DashboardContext } from '../Context/DashboardContext';
-import {MOCK_ALERTS, MOCK_BOARDS} from '../mock'
+import {MOCK_ALERTS,} from '../mock'
 import { Board, Profile } from '@/Interface/Dashboard';
 import { getProfile } from '@/APIs/Dashboard/GetProfile';
 import { ProfileContext } from '@/Context/ProfileContext';
 import { logoutUser } from '@/APIs/Auth/LogoutUser';
 import { router } from '@inertiajs/react';
+import { getBoardList } from '@/APIs/Board/GetBoardList';
 
 export default function Dashboard() {
     
@@ -22,7 +23,7 @@ export default function Dashboard() {
 
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const [activeRail, setActiveRail] = useState("");
-    const [boards, setBoards] = useState(MOCK_BOARDS);
+    const [boardLists, setBoardLists] = useState<Board[]>([]);
     const [selectedBoard, setSelectedBoard] = useState<Board | null>(null);
     const [alerts, setAlerts] = useState(MOCK_ALERTS);
     const [profile, setProfile] = useState<Profile>({
@@ -46,8 +47,21 @@ export default function Dashboard() {
             setIsPanelOpen(true);
             setActiveRail(selected);
         }
+    }   
+
+    const handleLogout = async() => {
+        try {
+            const res = await logoutUser();
+            if (res.success) {
+                router.visit('/dashboard');
+            }
+        } catch (error) {
+            console.log('Failed to log out user', error);
+        }
     }
     
+    
+    // fetch functions
     const getProfileOnLoad = async() => {
         console.log('fetching profile data');
         try {
@@ -65,19 +79,22 @@ export default function Dashboard() {
         }
     }
 
-    const handleLogout = async() => {
+    const getBoardListOnLoad = async () => {
+        console.log('fetching user board list');
         try {
-            const res = await logoutUser();
+            const res = await getBoardList();
+
             if (res.success) {
-                router.visit('/dashboard');
+                setBoardLists(res.data);
             }
         } catch (error) {
-            console.log('Failed to log out user', error);
+            console.log('Failed to fetch User boards');
         }
-    }
-    
+    }   
+
     useEffect(()=>{
         getProfileOnLoad();
+        getBoardListOnLoad();
     }, []);
 
 
@@ -86,7 +103,7 @@ export default function Dashboard() {
             <Rail 
                 showPanel={handleOpenPanel}
             />
-            <DashboardContext.Provider value = {{boards, alerts, selectedBoard, setSelectedBoard, handleLogout}}>
+            <DashboardContext.Provider value = {{boardLists, alerts, selectedBoard, setSelectedBoard, handleLogout}}>
                 <ProfileContext.Provider value = {{profile, handleLogout}}>
                     <Panel isOpen={isPanelOpen} activeRail={activeRail}/>
                     <BoardComponent/>   

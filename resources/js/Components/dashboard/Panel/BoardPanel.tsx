@@ -7,8 +7,8 @@ export default function BoardPanel () {
     const context = useDashboard();
     if (!context) return null;
 
-    const {boards, setSelectedBoard} = context;
-
+    const {boardLists, setSelectedBoard} = context;
+    
     const handleBoardClick = (board: Board) =>{
         setSelectedBoard(board);
     }
@@ -19,7 +19,7 @@ export default function BoardPanel () {
                 <span className="text-2xl font-extralight">BOARDS</span>
             </div>
             <div>
-                {boards.map(board=>(
+                {boardLists?.map(board=>(
                     <div 
                         key={board.id}
                         onClick={()=>handleBoardClick(board)}

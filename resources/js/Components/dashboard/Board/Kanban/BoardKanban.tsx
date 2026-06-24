@@ -1,10 +1,12 @@
 import { CardDetail, CardTile, Column } from "@/Interface/Dashboard"
 import BoardColumn from "./Column/BoardColumn"
 import AddColumn from "./Column/AddColumn"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import CardModal from "./Column/Card/CardModal"
 import { MOCK_CARD_DETAILS } from "@/mock"
 import { DndContext, DragEndEvent } from "@dnd-kit/core"
+import { getCardDetails } from "@/APIs/Board/GetCardDetails"
+import { updateCardColumn } from "@/APIs/Board/UpdateCardColumn"
 
 type Props = {
     columns: Column []
@@ -14,10 +16,17 @@ export default function BoardKanban ({columns: initialColumns}: Props) {
     const [selectedCard, setSelectedCard] = useState<CardDetail | null> (null);
     const [columns, setColumns] = useState<Column[]>(initialColumns);
 
-    const handleCardClick = (card: CardTile) => {
-        const cardDetail = MOCK_CARD_DETAILS.find(c => c.id === card.id) ?? null;
-        setSelectedCard(cardDetail)
-        console.log('opening modal', cardDetail);
+    const handleCardClick = async(card: CardTile) => {
+        try {
+            const res = await getCardDetails(card.id);
+
+            console.log(res);
+            if (res.success) {
+                setSelectedCard(res.data); 
+            }
+        } catch(error) {
+            console.log('Failed to load card data', error);
+        }
     }
 
     const handleModalClose = () => {
@@ -25,7 +34,8 @@ export default function BoardKanban ({columns: initialColumns}: Props) {
         setSelectedCard(null)
     }
 
-    const handleDragEnd = (event: DragEndEvent) => {
+
+    const handleDragEnd = async (event: DragEndEvent) => {
         const {active, over} = event;
         
         if (!over) return;
@@ -50,7 +60,18 @@ export default function BoardKanban ({columns: initialColumns}: Props) {
             }
             return col;
         }));
+
+        try {
+            const id = cardId;
+            await updateCardColumn({ id, newColId: targetColumnId, oldColId: sourceColumn.id });
+        } catch(error) {
+            console.log('Failed to update card column', error);
+        }
     }
+    
+    useEffect(() => {
+        setColumns(initialColumns);
+    }, [initialColumns]);
 
     return (
         <DndContext onDragEnd={handleDragEnd}>
