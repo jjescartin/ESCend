@@ -1,7 +1,8 @@
+import { ColumnPayload } from "@/Interface/Dashboard";
 import { useState } from "react";
 
 type Props = {
-    onAdd: (title: string, color: string) => void;
+    onAdd: (payload: ColumnPayload) => void;
 }
 
 export default function AddColumn({ onAdd }: Props) {
@@ -16,7 +17,8 @@ export default function AddColumn({ onAdd }: Props) {
             return;
         };
         setError("");
-        onAdd(title, color);
+        onAdd({title, color});
+        setTitle("");
         setColor("#6366f1");
         setIsAdding(false);
     }

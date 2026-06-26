@@ -1,21 +1,25 @@
-import { CardDetail, CardTile, Column } from "@/Interface/Dashboard"
+import { CardDetail, CardTile, Column, ColumnPayload } from "@/Interface/Dashboard"
 import BoardColumn from "./Column/BoardColumn"
 import AddColumn from "./Column/AddColumn"
 import { useState, useEffect } from "react"
 import CardModal from "./Column/Card/CardModal"
-import { MOCK_CARD_DETAILS } from "@/mock"
 import { DndContext, DragEndEvent } from "@dnd-kit/core"
 import { getCardDetails } from "@/APIs/Board/GetCardDetails"
 import { updateCardColumn } from "@/APIs/Board/UpdateCardColumn"
 
 type Props = {
-    columns: Column []
+    columns: Column [],
+    onAddColumn: (payload: ColumnPayload) => void;
+    onUpdateColumn: (id: number, payload: ColumnPayload) => void;
+    onDeleteColumn: (id: number) => void;
 }
 
-export default function BoardKanban ({columns: initialColumns}: Props) {
+export default function BoardKanban ({columns: initialColumns, onAddColumn, onUpdateColumn, onDeleteColumn}: Props) {
     const [selectedCard, setSelectedCard] = useState<CardDetail | null> (null);
     const [columns, setColumns] = useState<Column[]>(initialColumns);
 
+
+    // card handlers
     const handleCardClick = async(card: CardTile) => {
         try {
             const res = await getCardDetails(card.id);
@@ -81,9 +85,11 @@ export default function BoardKanban ({columns: initialColumns}: Props) {
                         key={columns.id} 
                         column={columns}
                         onCardClick = {handleCardClick}
+                        onEdit={onUpdateColumn}
+                        onDelete={onDeleteColumn}
                     />
                 ))}
-                <AddColumn />
+                <AddColumn onAdd={onAddColumn}/>
 
                 {selectedCard && (
                     <CardModal 

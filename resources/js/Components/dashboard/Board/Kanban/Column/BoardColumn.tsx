@@ -1,4 +1,4 @@
-import { CardTile, Column } from "@/Interface/Dashboard";
+import { CardTile, Column, ColumnPayload } from "@/Interface/Dashboard";
 import BoardCard from "./Card/BoardCard";
 import { useDroppable } from "@dnd-kit/core";
 import { useEffect, useRef, useState } from "react";
@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 type Props = {
     column: Column,
     onCardClick: (card: CardTile) => void;
-    onEdit: (id: number, title: string, color: string) => void;
+    onEdit: (id: number, payload: ColumnPayload) => void;
     onDelete: (id: number) => void;
 }
 
@@ -35,7 +35,7 @@ export default function BoardColumn({ column, onCardClick, onEdit, onDelete }: P
             return;
         }
         setError("");
-        onEdit(column.id, title, color);
+        onEdit(column.id, {title, color});
         setIsEditing(false);
     }
 
@@ -91,7 +91,7 @@ export default function BoardColumn({ column, onCardClick, onEdit, onDelete }: P
                             {column.title}
                         </span>
                         <span className="text-xs text-gray-400">
-                            {column.cards.length}
+                            {column.cards?.length ?? 0}
                         </span>
                     </div>
                     <div className="relative" ref={menuRef}>
@@ -123,7 +123,7 @@ export default function BoardColumn({ column, onCardClick, onEdit, onDelete }: P
                     ref={setNodeRef}
                     className={"flex-1 rounded-lg transition-colors " + (isOver ? 'bg-gray-200' : '')}
                 >
-                    {column.cards.map(card => (
+                    {(column.cards ?? []).map(card => (
                         <BoardCard
                             key={card.id}
                             card={card}
@@ -131,6 +131,9 @@ export default function BoardColumn({ column, onCardClick, onEdit, onDelete }: P
                         />
                     ))}
                 </div>
+                <button className="w-full text-xs text-gray-400 border-2 border-dashed border-gray-300 rounded-lg py-1.5 hover:border-gray-400 hover:text-gray-500 transition-colors">
+                    + Add card
+                </button>
                 {isEditing && (
                     <div className="absolute inset-0 bg-gray-100/60 backdrop-blur-sm rounded-lg" />
                 )}

@@ -17,6 +17,10 @@ export interface BoardContent {
     completed: boolean
 }
 
+export type ColumnPayload = {
+    title: string,
+    color: string,
+}
 export interface Column {
     id: number,
     board_id: number,
