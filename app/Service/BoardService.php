@@ -6,9 +6,28 @@ use App\Models\Board;
 
 class BoardService
 {
-    public function getBoards(int $UserId)
+    public function getBoardData(int $boardId)
     {
-        return Board::where('user_id', $UserId)->get();
+        return Board::where('id', $boardId)->first();
+    }
+
+    public function storeBoard(array $field) 
+    {
+        $board = Board::create($field);
+        
+        return $board;
+    }
+
+    public function updateBoard(int $id, array $field) 
+    {
+        $board = Board::find($id);
+        $board->update($field);
+        return $board;
+    }
+
+    public function deleteBoard(int $id) 
+    {
+        return Board::destroy($id);
     }
 
     public function getBoardColumns(int $id)

@@ -10,7 +10,7 @@ type Props = {
 }
 export default function Panel({ isOpen, activeRail }: Props) {
     return (
-        <div className={`panel-component h-screen bg-green-100 flex flex-col items-center gap-4 px-2 py-4 transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'w-72 opacity-100' : 'w-0 px-0 opacity-0'}`}>
+        <div className={`panel-component h-screen bg-green-100 flex flex-col items-center gap-4 px-2 py-4 transition-all duration-300 ease-in-out ${isOpen ? 'w-72 opacity-100' : 'w-0 px-0 opacity-0 invisible'}`}>
             {activeRail === "Board" && <BoardPanel />}
             {activeRail === "Alerts" && <AlertsPanel />}
             {activeRail === "Search" && <SearchPanel />}

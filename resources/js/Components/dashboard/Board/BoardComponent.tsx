@@ -1,6 +1,5 @@
 import { useDashboard } from "@/Context/DashboardContext";
 import React, { useEffect, useState } from "react";
-import { MOCK_BOARD_CONTENTS, MOCK_CARDS, MOCK_COLUMNS } from "@/mock";
 import BoardHeader from "./Header/BoardHeader";
 import BoardKanban from "./Kanban/BoardKanban";
 import { BoardContent, Column } from "@/Interface/Dashboard";
@@ -11,6 +10,7 @@ export default function BoardComponent() {
     const [boardData, setBoardData] = useState<BoardContent | null>({
         id: 0,
         name: "",
+        description: "",
         end_date: "",
         completed: false
     });
@@ -20,15 +20,8 @@ export default function BoardComponent() {
     const context = useDashboard();
     if (!context) return null;
 
-    const {selectedBoard} = context;
+    const {selectedBoard, openBoardModal} = context;
     
-    // const boardData = MOCK_BOARD_CONTENTS.find(b => b.id === selectedBoard?.id) ?? null;
-    // const BoardColumns = MOCK_COLUMNS
-    //     .filter(col =>boardData?.id)
-    //     .map(col =>({
-    //         ...col,
-    //         cards: MOCK_CARDS.filter(card => card.column_id === col.id)
-    //     }));
     useEffect(()=>{
         if (!selectedBoard) return;
 
@@ -58,7 +51,7 @@ export default function BoardComponent() {
             console.log('Failed to load board data', error);
         }
     }
-
+    console.log(boardData?.name);
     return (
         <div className="board-component flex-1 h-screen overflow-auto p-5">
             <div className="board-list h-full flex flex-col">
@@ -68,7 +61,15 @@ export default function BoardComponent() {
                             <BoardHeader name = {boardData.name} end_date={boardData.end_date}/>
                             <BoardKanban columns = {BoardColumns}/>
                         </div>
-                    : <div> "No boards yet" + [+ Create Project] button</div>
+                    : 
+                    <div className="flex items-start justify-left h-full gap-1">
+                        <span className="text-gray-400 text-sm">No boards selected yet</span>
+                        <button
+                            onClick={() => openBoardModal('create')}
+                            className="text-sm text-green-700 hover:underline transition-colors">
+                            [+ Create Project]
+                        </button>
+                    </div>
                 }
             </div>
         </div>

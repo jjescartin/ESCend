@@ -26,7 +26,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function getBoardList () 
+    public function getUserBoardList () 
     {
         /** @var \App\Models\User $user */
         $data = Auth::user()->boards()

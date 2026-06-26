@@ -1,3 +1,9 @@
+export type BoardPayload = {
+    name: string,
+    description: string | null, 
+    end_date: string | null
+}
+
 export interface Board {
     id: number,
     boardName: string
@@ -5,7 +11,8 @@ export interface Board {
 
 export interface BoardContent {
     id: number,
-    name: string | null, 
+    name: string, 
+    description: string | null,
     end_date: string | null,
     completed: boolean
 }

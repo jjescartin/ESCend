@@ -14,6 +14,7 @@ class Board extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'description',
         'end_date',
         'completed'
     ];
