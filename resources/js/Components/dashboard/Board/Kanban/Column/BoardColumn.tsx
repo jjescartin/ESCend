@@ -6,11 +6,12 @@ import { useEffect, useRef, useState } from "react";
 type Props = {
     column: Column,
     onCardClick: (card: CardTile) => void;
+    onAddCardClick: (columnId: number) => void;
     onEdit: (id: number, payload: ColumnPayload) => void;
     onDelete: (id: number) => void;
 }
 
-export default function BoardColumn({ column, onCardClick, onEdit, onDelete }: Props) {
+export default function BoardColumn({ column, onCardClick, onAddCardClick, onEdit, onDelete }: Props) {
     const { setNodeRef, isOver } = useDroppable({ id: column.id });
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
@@ -47,7 +48,9 @@ export default function BoardColumn({ column, onCardClick, onEdit, onDelete }: P
     }
 
     return (
-        <div className="flex flex-col rounded-lg bg-gray-100 p-3 gap-2 w-64 shrink-0 h-full relative">
+        <div 
+            ref={setNodeRef}
+            className="flex flex-col rounded-lg bg-gray-100 p-3 gap-2 w-64 shrink-0 h-full">
             {/* Column Header */}
             {isEditing ? (
                 <div className="flex flex-col gap-2">
@@ -120,7 +123,6 @@ export default function BoardColumn({ column, onCardClick, onEdit, onDelete }: P
             {/* Cards */}
             <div className="relative flex-1">
                 <div
-                    ref={setNodeRef}
                     className={"flex-1 rounded-lg transition-colors " + (isOver ? 'bg-gray-200' : '')}
                 >
                     {(column.cards ?? []).map(card => (
@@ -131,7 +133,9 @@ export default function BoardColumn({ column, onCardClick, onEdit, onDelete }: P
                         />
                     ))}
                 </div>
-                <button className="w-full text-xs text-gray-400 border-2 border-dashed border-gray-300 rounded-lg py-1.5 hover:border-gray-400 hover:text-gray-500 transition-colors">
+                <button 
+                    onClick={()=>{onAddCardClick(column.id)}}
+                    className="w-full text-xs text-gray-400 border-2 border-dashed border-gray-300 rounded-lg py-1.5 hover:border-gray-400 hover:text-gray-500 transition-colors">
                     + Add card
                 </button>
                 {isEditing && (

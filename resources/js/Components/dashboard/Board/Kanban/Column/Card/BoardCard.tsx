@@ -11,6 +11,7 @@ export default function BoardCard ({card, onClick}: Props) {
     
     const style = transform ? {
         transform:  `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        zIndex: 999,
     } : undefined;
 
     return (

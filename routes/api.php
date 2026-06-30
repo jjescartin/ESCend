@@ -5,6 +5,7 @@ use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Card;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,15 @@ Route::middleware('auth')->group(function() {
     });
 
     // card endpoints
-    Route::get('/card/{id}', [CardController::class, 'show'])->name('get.card.details');
-    Route::patch('/card/{id}/move', [CardController::class, 'move']);
+    // Route::get('/card/{id}', [CardController::class, 'show'])->name('get.card.details');
+    // Route::patch('/card/{id}/move', [CardController::class, 'move']);
+
+    Route::prefix('card')->group(function() {
+        Route::post('/',[CardController::class, 'store']);
+        Route::get('/{id}', [CardController::class, 'show']);
+        Route::patch('/{id}', [CardController::class, 'update']);
+        Route::delete('/{id}', [CardController::class, 'delete']);
+        Route::patch('/{id}/move', [CardController::class, 'move']);
+    });
+
 });

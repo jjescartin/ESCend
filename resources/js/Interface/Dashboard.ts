@@ -30,6 +30,13 @@ export interface Column {
     cards: CardTile[]
 }
 
+export type CardPayload = {
+    title: string,
+    description: string | null,
+    priority: string,
+    due_date: string | null,
+}
+
 export interface CardTile {
     id: number,
     column_id: number,
