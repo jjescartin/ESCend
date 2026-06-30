@@ -10,8 +10,8 @@ RUN npm run build
 FROM php:8.3-cli-alpine
 WORKDIR /app
 
-RUN apk add --no-cache sqlite sqlite-dev libzip-dev zip unzip \
-    && docker-php-ext-install pdo pdo_sqlite zip
+RUN apk add --no-cache sqlite sqlite-dev libzip-dev zip unzip oniguruma-dev libxml2-dev \
+    && docker-php-ext-install pdo pdo_sqlite zip mbstring xml
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . .
@@ -23,4 +23,4 @@ RUN composer install --no-dev --optimize-autoloader \
     && chmod -R 775 storage bootstrap/cache database
 
 EXPOSE 10000
-CMD php artisan migrate --seed --force && php artisan serve --host 0.0.0.0 --port 10000
+CMD php artisan config:clear && php artisan migrate --seed --force && php artisan serve --host 0.0.0.0 --port 10000
