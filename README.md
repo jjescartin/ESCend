@@ -1,61 +1,271 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ESCend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern Single Page Application (SPA) built with Laravel, React, and Inertia.js for managing tasks through an intuitive Kanban board workflow.
 
-## About Laravel
+ESCend is a portfolio project built entirely from scratch to demonstrate my approach to designing and developing a maintainable full-stack application. The project focuses on clean architecture, separation of concerns, and modern development practices while delivering a responsive and interactive user experience.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Demo
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The application includes a built-in **View Demo** option that allows reviewers to explore the project immediately without creating an account.
 
-## Learning Laravel
+Instead of requiring registration, the demo authenticates users into a pre-configured workspace populated with sample boards, columns, and cards, allowing the application's functionality to be evaluated instantly.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Features
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Authentication
 
-## Laravel Sponsors
+- User Login
+- Built-in Demo Workspace
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Board Management
 
-### Premium Partners
+- Create Boards
+- Rename Boards
+- Delete Boards
+- Share Boards via Link
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Column Management
 
-## Contributing
+- Create Columns
+- Update Columns
+- Delete Columns
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Card Management
 
-## Code of Conduct
+- Create Cards
+- Update Cards
+- Delete Cards
+- Drag & Drop Card Movement
+- Card Descriptions
+- Card Priority
+- Card Labels
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Technical Features
 
-## Security Vulnerabilities
+- Laravel FormRequest validation classes
+- Service Layer Architecture
+- React Context API
+- TypeScript
+- Inertia.js SPA
+- RESTful API endpoints
+- SQLite database
+- Database migrations
+- Database seeders
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Laravel 12 | Backend framework |
+| PHP 8.2+ | Server-side language |
+| React 18 | Frontend framework |
+| TypeScript | Static typing |
+| Inertia.js | SPA architecture |
+| Vite | Frontend bundler |
+| SQLite | Default database |
+| Eloquent ORM | Database interaction |
+| Tailwind CSS | Utility-first styling |
+| Bootstrap 5 | Existing UI components |
+| React Bootstrap | React UI components |
+| dnd-kit | Drag-and-drop interactions |
+| Docker | Deployment environment |
+| Render | Cloud deployment |
+
+---
+
+## Project Architecture
+
+The backend follows Laravel's MVC architecture while introducing a dedicated service layer to separate business logic from request handling.
+
+```
+HTTP Request
+      │
+      ▼
+Controller
+      │
+      ▼
+FormRequest Validation
+      │
+      ▼
+Service Layer
+      │
+      ▼
+Eloquent Models
+      │
+      ▼
+SQLite Database
+```
+
+### Backend
+
+The backend is organized around resource-based controllers, dedicated FormRequest validation classes, service classes, and Eloquent models.
+
+Responsibilities are intentionally separated:
+
+- Controllers receive and process HTTP requests.
+- FormRequest classes handle validation.
+- Service classes contain business logic.
+- Eloquent models manage database interaction.
+
+This keeps controllers concise while allowing business logic to remain reusable and easier to maintain.
+
+### Frontend
+
+The frontend follows a layered structure.
+
+```
+Pages
+Components
+APIs
+Context
+Interfaces
+```
+
+API communication is encapsulated in dedicated Axios modules while React components remain focused on rendering and user interaction.
+
+State is managed as close to its owner as possible, with React Context introduced only where shared state genuinely benefits multiple components.
+
+---
+
+## Screenshots
+
+### Landing Page
+
+![Landing Page](assets/images/landing-page.png)
+
+### Dashboard
+
+![Dashboard](assets/images/dashboard.png)
+
+### Board
+
+![Board](assets/images/board.png)
+
+### Card Details
+
+![Card Details](assets/images/card-modal.png)
+
+---
+
+## Installation
+
+### Requirements
+
+- PHP 8.2+
+- Composer
+- Node.js
+- npm
+
+### Clone the repository
+
+```bash
+git clone https://github.com/yourusername/ESCend.git
+
+cd ESCend
+```
+
+### Install dependencies
+
+```bash
+composer install
+
+npm install
+```
+
+### Configure environment
+
+```bash
+cp .env.example .env
+
+php artisan key:generate
+```
+
+### Database
+
+ESCend uses **SQLite** by default.
+
+Run the migrations and seed the database.
+
+```bash
+php artisan migrate --seed
+```
+
+### Start the application
+
+```bash
+npm run dev
+
+php artisan serve
+```
+
+The application will now be available locally.
+
+---
+
+## Deployment
+
+ESCend is containerized using Docker and deployed on Render.
+
+Deployment automatically executes database migrations and seeders, ensuring the application is immediately usable after deployment.
+
+---
+
+## Phase 2 Roadmap
+
+### Authentication
+
+- User Registration
+- Edit Profile
+- Password Reset
+- Email Verification
+
+### Board Management
+
+- Dynamic Label Management
+
+### Card Management
+
+- Comments
+- Card Assignees
+
+### User Experience
+
+- Responsive Layout
+- Dark Mode
+- Notifications
+- Search & Filtering
+- Loading Animations
+
+### Quality
+
+- Automated PHPUnit Tests
+
+---
+
+## Project Goals
+
+The objective of ESCend extends beyond implementing Kanban functionality.
+
+The project serves as a practical demonstration of building a modern Laravel and React application using clean architecture principles, maintainable project organization, and thoughtful engineering decisions.
+
+Key areas of focus include:
+
+- Separation of concerns
+- Service-oriented backend architecture
+- Organized React component hierarchy
+- Strong typing with TypeScript
+- Maintainable request validation
+- Efficient frontend state management
+- Production-style deployment workflow
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License.
